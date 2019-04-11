@@ -1,5 +1,5 @@
 # wxapp-project
-wxapp-project是一个简单的小程序工程化进程。
+wxapp-project是一个简单的小程序工程化工具。
 
 ---
 
@@ -26,7 +26,7 @@ npm i -g wxapp-project
 
 - 尝试在小程序根目录跑通`wxp run`
 
-- 查看更多帮助信息请使用`wxp -v`
+- 查看更多帮助信息请使用`wxp -h`
 
 
 # 详细使用说明
