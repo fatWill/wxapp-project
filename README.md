@@ -1,5 +1,5 @@
 # wxapp-project
-wxapp-project是一个简单的小程序工程化工具。
+wxapp-project是一个简单的小程序工程化工具
 
 ---
 
