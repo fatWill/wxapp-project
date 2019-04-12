@@ -1,12 +1,14 @@
 const Chokidar = require('chokidar');
 const Path = require("path");
 const Glob = require("glob");
+const Fs = require("fs");
 
 const logger = require("./logger");
 const less = require("./less");
-const config = require("./config");
+const common = require("./common");
+const tools = require("./tools");
 
-const cwd = process.cwd();
+const config = common.getConfig();
 
 // 处理忽略文件
 const dealIgnore = ignoreds => {
@@ -47,23 +49,17 @@ const dealIgnore = ignoreds => {
 	return result;
 }
 
-module.exports = () => {
-	let ignore = [];
-	let _config = {};
-
-	try {
-		_config = require(Path.resolve(cwd, config.filename));
-		ignore = dealIgnore(_config.ignore);
-
-	} catch (e) {
-		logger.error(e);
-		return
-	}
+module.exports = async () => {
 
 	// less监听
-	if (_config.less2wxss) {
+	if (config.less2wxss) {
 		(async () => {
+			if (!tools.isArray(config.ignore)) {
+				return [];
+			};
+
 			let result = [];
+			let ignore = dealIgnore(config.ignore);
 			for (let pattern of ignore) {
 				const files = await new Promise((resolve, reject) => {
 					Glob(pattern, {
@@ -106,19 +102,19 @@ module.exports = () => {
 	}
 
 	// 图片转换监听
-	if (_config.minifyImages) {
+	if (config.minifyImages) {
 		const watcher = Chokidar.watch("**/*.@(png|jpeg|jpg)");
 
 		watcher.on("add", async path => {
-			
+
 		});
 
 		watcher.on("change", async path => {
-			
+
 		});
 
 		watcher.on("unlink", path => {
-			
+
 		});
 	}
 }

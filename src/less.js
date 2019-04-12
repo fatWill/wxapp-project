@@ -1,11 +1,16 @@
-const LessPluginCleanCSS = require('less-plugin-clean-css');
 const Path = require("path");
 const Less = require("less");
 const Fs = require("fs");
+const Px2rpx = require('px2rpx');
+const CleanCSS = require('clean-css');
+const Postcss = require("postcss");
+const PostcssUrl = require('postcss-url');
 
 const logger = require("./logger");
+const common = require("./common");
 
-const cwd = process.cwd();
+const cwd = common.getCWD();
+const config = common.getConfig();
 
 // 依赖映射
 const dependReflect = {};
@@ -29,18 +34,40 @@ const delDependReflect = (depend) => {
 
 // 将less写入
 const writeLess = (path, ignoreFiles) => {
-	const content = Fs.readFileSync(path, 'utf-8');
 	const basename = Path.basename(path, ".less");
 	const router = Path.dirname(path);
 
+	const content = Fs.readFileSync(path, 'utf-8');
+
 	return new Promise((resolve, reject) => {
 		Less.render(content, {
-			plugins: [new LessPluginCleanCSS()],
 			filename: path,
 			paths: [cwd]
 		}).then(res => {
+			let output = res.css;
+
+			if (config.px2rpx) {
+				const px2rpxIns = new Px2rpx({
+					rpxUnit: config.rpxUnit > 0 ? config.rpxUnit : 1,
+				});
+				output = px2rpxIns.generaterpx(output);
+			}
+
+			if (config.minifyWxss) {
+				output = new CleanCSS({
+					level: 1
+				}).minify(output).styles;
+			}
+
+			if (config.inlineUrl) {
+				output = Postcss().use(PostcssUrl({
+					url: 'inline',
+					basePath: cwd,
+				})).process(output);
+			}
+
 			if (!Reflect.has(ignoreFiles, path)) {
-				Fs.writeFile(Path.resolve(router, `${basename}.wxss`), res.css, err => {
+				Fs.writeFile(Path.resolve(router, `${basename}.wxss`), output, err => {
 					if (err) {
 						reject(err);
 					} else {
@@ -67,7 +94,6 @@ module.exports = {
 			const root = Path.resolve(path);
 
 			// 创建依赖
-
 			const depend = res.imports.map(value => {
 				return Path.resolve(router, value);
 			});
