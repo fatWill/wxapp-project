@@ -5,11 +5,12 @@ module.exports = {
 	minifyWxss: true,
 	rpxUnit: 1,
 	inlineUrl: true,
-	minifyImages: false,
+	tinifyImage: false,
 	ignore: [{
 		type: 'folder',
 		value: 'node_modules',
 	}],
 
-	filename: '.wxp.json'
+	filename: '.wxp.json',
+	name: 'wxp',
 }

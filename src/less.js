@@ -5,12 +5,14 @@ const Px2rpx = require('px2rpx');
 const CleanCSS = require('clean-css');
 const Postcss = require("postcss");
 const PostcssUrl = require('postcss-url');
+const FileEntryCache = require('file-entry-cache');
 
 const logger = require("./logger");
 const common = require("./common");
 
 const cwd = common.getCWD();
 const config = common.getConfig();
+const cache = FileEntryCache.create(config.name, undefined, true);
 
 // 依赖映射
 const dependReflect = {};
@@ -33,7 +35,7 @@ const delDependReflect = (depend) => {
 }
 
 // 将less写入
-const writeLess = (path, ignoreFiles) => {
+const writeLess = (path, ignoreFiles, hasFileChanged = true) => {
 	const basename = Path.basename(path, ".less");
 	const router = Path.dirname(path);
 
@@ -66,7 +68,7 @@ const writeLess = (path, ignoreFiles) => {
 				})).process(output);
 			}
 
-			if (!Reflect.has(ignoreFiles, path)) {
+			if (!Reflect.has(ignoreFiles, path) && hasFileChanged) {
 				Fs.writeFile(Path.resolve(router, `${basename}.wxss`), output, err => {
 					if (err) {
 						reject(err);
@@ -87,8 +89,14 @@ const writeLess = (path, ignoreFiles) => {
 module.exports = {
 	async add(path, ignoreFiles) {
 		try {
-			const res = await writeLess(path, ignoreFiles);
-			logger.success(`add file success: ${path}`);
+			const hasFileChanged = cache.hasFileChanged(path);
+
+			const res = await writeLess(path, ignoreFiles, hasFileChanged);
+
+			if (hasFileChanged) {
+				logger.success(`add file success: ${path}`);
+				cache.reconcile();
+			}
 
 			const router = Path.dirname(path);
 			const root = Path.resolve(path);
@@ -113,7 +121,6 @@ module.exports = {
 		roots = roots ? roots : [];
 
 		for (let root of [path, ...roots]) {
-
 			try {
 				await writeLess(root, ignoreFiles);
 				logger.success(`change file success: ${root}`);

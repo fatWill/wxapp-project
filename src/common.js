@@ -11,6 +11,7 @@ const _config = (() => {
 		Fs.accessSync(Path.resolve(cwd, config.filename));
 		try {
 			_config = require(Path.resolve(cwd, config.filename));
+			_config = Object.assign(config, _config);
 		} catch (e) {
 			logger.error(".wxp.json is not a object");
 			logger.error(e);

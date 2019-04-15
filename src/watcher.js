@@ -5,6 +5,7 @@ const Fs = require("fs");
 
 const logger = require("./logger");
 const less = require("./less");
+const tinifyImage = require("./tinify-image");
 const common = require("./common");
 const tools = require("./tools");
 
@@ -102,19 +103,22 @@ module.exports = async () => {
 	}
 
 	// 图片转换监听
-	if (config.minifyImages) {
-		const watcher = Chokidar.watch("**/*.@(png|jpeg|jpg)");
+	if (!config.minifyImages) {
+		let ignore = [];
+		if (tools.isArray(config.ignore)) {
+			ignore = dealIgnore(config.ignore);
+		};
+		const watcher = Chokidar.watch("**/*.@(png|jpeg|jpg|svg|gif)", {
+			ignored: ignore,
+			followSymlinks: false,
+		});
 
 		watcher.on("add", async path => {
-
+			tinifyImage(path);
 		});
 
 		watcher.on("change", async path => {
-
-		});
-
-		watcher.on("unlink", path => {
-
+			tinifyImage(path);
 		});
 	}
 }
