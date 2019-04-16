@@ -6,18 +6,28 @@ wxapp-project是一个简单的小程序工程化工具
 >目前已经支持:
 
 > ✔︎ less转化为wxss
+> 
+> ✔︎ 支持px转化rpx（不编译px请用大写PX表示）
+> 
+> ✔︎ 支持打包压缩，文件内联base64转换
+> 
+> ✔︎ 可以配置忽略文件、某些设置的开关等
+> 
+> ✔︎ 增加增量编译，已编译过的文件不会再次编译
+> 
+> ✔︎ 自动压缩项目内png、jpg、jpeg、svg、gif文件
+> 
+> ✔︎ 
 
 ---
 
-> 准备更新支持:
+> 更新预告:
 > 
 > ➟ 快速创建小程序模版文件
->
-> ➟ 自动压缩项目内png、jpg、jpeg文件
 > 
 > ...
 
-
+---
 
 # 安装&使用
 ```
@@ -37,24 +47,30 @@ npm i -g wxapp-project
 	
 	```
 	{
-	    "less2wxss": true,
-	    "minifyImages": false,
-	    "ignore": [
-	        {
-	            "value": "benxian",
-	            "type": "folder"
-	        }
-	    ]
+		'less2wxss': true,
+		'minifyImage': true,
+		'px2rpx': true,
+		'rpxUnit': 1,
+		'inlineUrl': true,
+		'minifyWxss': false,
+		'ignore': [{
+			'type': 'folder',
+			'value': 'node_modules',
+		}],
 	}
 	```
 	
-	- `less2wxss` 配置是否开启less转化成wxss的功能 默认为`true`
-	- `minifyImages ` 配置是否开启压缩图片的功能 默认为`false`
-	- `ignore ` 忽略监听文件
+	- `less2wxss` 是否开启less转化成wxss的功能 默认为`true`
+	- `minifyImages` 是否开启压缩图片的功能 默认为`true`
+	- `px2rpx` 是否开启px转化成rpx 默认为`true`
+	- `rpxUnit` `px`转化成`rpx`的倍数 默认为`1`
+	- `inlineUrl` 是否将less中内联的文件转化成base64 默认为`true `
+	- `minifyWxss` 是否开启转化打包后的wxss进行压缩 默认为`false`
+	- `ignore` 忽略监听文件
 	   - `type` 类型，如`folder` `file` `glob`等
 	   - `value` 路径或取值，如`node_modules`
 	
-	其中`ignore`详细的使用方式和微信小程序`project.config.json`中的`ignore`忽略方法如出一辙，[点击此处查看](https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html?search-key=ignore)。（__注意__，less的忽略只是不打包成wxss。如a.less import b.less，b.less文件被忽略，那么b.less的保存还是会监听到并且会追溯到a的更新打包，只是b.less不打包成wxss）。
+	其中`ignore`详细的使用方式和微信小程序`project.config.json`中的`ignore`忽略方法如出一辙，[点击此处查看](https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html?search-key=ignore)。（__注意__，less的忽略只是不打包成wxss。如a.less import b.less，b.less文件被忽略，那么b.less的保存还是会监听到并且会追溯到a的更新打包，只是b.less不打包成wxss），图片的监听忽略是不压缩
 	
 
 - ### `wxp run`

@@ -12,7 +12,8 @@ const common = require("./common");
 
 const cwd = common.getCWD();
 const config = common.getConfig();
-const cache = FileEntryCache.create(config.name, undefined, true);
+const name = common.getName();
+const cache = FileEntryCache.create(name, undefined, true);
 
 // 依赖映射
 const dependReflect = {};

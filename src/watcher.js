@@ -5,7 +5,7 @@ const Fs = require("fs");
 
 const logger = require("./logger");
 const less = require("./less");
-const tinifyImage = require("./tinify-image");
+const minifyImage = require("./minify-image");
 const common = require("./common");
 const tools = require("./tools");
 

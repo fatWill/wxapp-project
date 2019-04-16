@@ -13,7 +13,8 @@ const logger = require("./logger");
 const common = require("./common");
 
 const config = common.getConfig();
-const cache = FileEntryCache.create(config.name, undefined, true);
+const name = common.getName();
+const cache = FileEntryCache.create(name, undefined, true);
 
 module.exports = async path => {
 	const hasFileChanged = cache.hasFileChanged(path);

@@ -2,15 +2,12 @@
 module.exports = {
 	less2wxss: true,
 	px2rpx: true,
-	minifyWxss: true,
+	minifyImages: true,
+	minifyWxss: false,
 	rpxUnit: 1,
 	inlineUrl: true,
-	tinifyImage: false,
 	ignore: [{
 		type: 'folder',
 		value: 'node_modules',
 	}],
-
-	filename: '.wxp.json',
-	name: 'wxp',
 }

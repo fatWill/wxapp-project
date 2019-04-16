@@ -23,13 +23,24 @@ const _config = (() => {
 	return _config;
 })()
 
+const name = `wxp`;
+
+const filename = `.${name}.json`;
+
 module.exports = {
-	getConfig() {
+	get getConfig() {
 		return _config;
 	},
 
-	getCWD() {
+	get getCWD() {
 		return cwd;
-	}
+	},
 
+	get getName() {
+		return name;
+	},
+
+	get getFilename() {
+		return filename;
+	}
 }
