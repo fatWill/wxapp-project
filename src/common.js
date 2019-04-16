@@ -28,19 +28,19 @@ const name = `wxp`;
 const filename = `.${name}.json`;
 
 module.exports = {
-	get getConfig() {
+	getConfig() {
 		return _config;
 	},
 
-	get getCWD() {
+	getCWD() {
 		return cwd;
 	},
 
-	get getName() {
+	getName() {
 		return name;
 	},
 
-	get getFilename() {
+	getFileName() {
 		return filename;
 	}
 }

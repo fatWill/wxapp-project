@@ -27,7 +27,7 @@ It only covers the most common items, and tries to guess sensible defaults.
 
 		const cwd = process.cwd();
 
-		const file = Path.resolve(cwd, filename);
+		const file = Path.resolve(cwd, fileName);
 
 		return {
 			content,
