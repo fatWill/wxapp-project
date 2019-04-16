@@ -103,7 +103,7 @@ module.exports = async () => {
 	}
 
 	// 图片转换监听
-	if (!config.minifyImages) {
+	if (config.minifyImages) {
 		let ignore = [];
 		if (tools.isArray(config.ignore)) {
 			ignore = dealIgnore(config.ignore);
@@ -114,11 +114,11 @@ module.exports = async () => {
 		});
 
 		watcher.on("add", async path => {
-			tinifyImage(path);
+			minifyImage(path);
 		});
 
 		watcher.on("change", async path => {
-			tinifyImage(path);
+			minifyImage(path);
 		});
 	}
 }
