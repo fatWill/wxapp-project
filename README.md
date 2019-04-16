@@ -17,7 +17,6 @@ wxapp-project是一个简单的小程序工程化工具
 > 
 > ✔︎ 自动压缩项目内png、jpg、jpeg、svg、gif文件
 > 
-> ✔︎ 
 
 ---
 
