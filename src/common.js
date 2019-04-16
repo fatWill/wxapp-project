@@ -5,12 +5,16 @@ const config = require("./config");
 const logger = require("./logger");
 const cwd = process.cwd();
 
+const name = `wxp`;
+
+const filename = `.${name}.json`;
+
 const _config = (() => {
 	let _config = {};
 	try {
-		Fs.accessSync(Path.resolve(cwd, config.filename));
+		Fs.accessSync(Path.resolve(cwd, filename));
 		try {
-			_config = require(Path.resolve(cwd, config.filename));
+			_config = require(Path.resolve(cwd, filename));
 			_config = Object.assign(config, _config);
 		} catch (e) {
 			logger.error(".wxp.json is not a object");
@@ -23,9 +27,7 @@ const _config = (() => {
 	return _config;
 })()
 
-const name = `wxp`;
 
-const filename = `.${name}.json`;
 
 module.exports = {
 	getConfig() {
