@@ -1,6 +1,6 @@
 {
   "name": "wxapp-project",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "小程序工程化，可以将less转化为wxss",
   "main": "bin/main.js",
   "bin": {
