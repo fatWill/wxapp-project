@@ -1,10 +1,13 @@
+![https://github.com/Jeff2Ma/WeApp-Workflow](images/wxp.jpeg)
+
+
 # wxapp-project
-wxapp-project是一个简单的小程序工程化工具
+wxapp-project是一个小程序前端工程构建流。
 
 ---
 
 >目前已经支持:
-
+>
 > ✔︎ less转化为wxss
 > 
 > ✔︎ 支持px转化rpx（不编译px请用大写PX表示）
