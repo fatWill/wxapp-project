@@ -1,7 +1,7 @@
 const Imagemin = require('imagemin');
 const ImageminGifsicle = require('imagemin-gifsicle');
 const ImageminJpegtran = require('imagemin-jpegtran');
-const ImageminPngquant = require('imagemin-pngquant');
+// const ImageminPngquant = require('imagemin-pngquant');
 const ImageminOptipng = require('imagemin-optipng');
 const ImageminSvgo = require('imagemin-svgo');
 const FileEntryCache = require('file-entry-cache');
@@ -24,7 +24,7 @@ module.exports = async path => {
 				ImageminGifsicle(),
 				ImageminJpegtran(),
 				ImageminOptipng(),
-				ImageminPngquant(),
+				// ImageminPngquant(),
 				ImageminSvgo()
 			]
 		});
