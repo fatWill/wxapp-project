@@ -95,25 +95,37 @@ npm i -g wxapp-project
 - ### `wxp setconfig <path>`
 	设置拷贝目录的配置，参数`path`为文件夹路径（注：必须为文件夹，可以选填为相对路径和绝对路径）.
 	- `-n --name` 选填参数 当你需要设置多个拷贝template时可以通过设置一个name值来标记，不设置默认name值为`defalut`
+		
+	---
 
 	> 示例：wxp setconfig test/ -n test
 	>
 	> ![https://github.com/fatWill/wxapp-project](images/setconfig.jpeg)
+	
+	---
 
 - ### `wxp getconfig`
 	可以查看你设置template的name值和对应的path。
 	
+	---
+	
 	> 示例：wxp getconfig
 	>
 	> ![https://github.com/fatWill/wxapp-project](images/getconfig.jpeg)
+	
+	---
 
 - ### `wxp new`
 	快速创建小程序工程
 	- `-n --name` 选填参数 选择对应name值的path进行拷贝，不设置默认name值为`defalut`
+
+	---
 	
 	> 示例：wxp new test2 -n test
 	>
 	> ![https://github.com/fatWill/wxapp-project](images/new.jpeg)
+	
+	---
 
 
 # bug&tip
