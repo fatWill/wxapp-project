@@ -130,6 +130,6 @@ npm i -g wxapp-project
 
 # bug&tip
 * 欢迎在issue中提出
-
+* 如果想要交流可以邮872016576@qq.com
 
 
