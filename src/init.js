@@ -1,5 +1,5 @@
 const Path = require('path');
-const Fs = require('fs');
+const Fs = require('fs-extra');
 
 const common = require("./common");
 const tools = require("./tools");

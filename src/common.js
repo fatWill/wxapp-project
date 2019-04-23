@@ -1,5 +1,5 @@
 const Path = require("path");
-const Fs = require("fs");
+const Fs = require("fs-extra");
 
 const config = require("./config");
 const logger = require("./logger");
@@ -14,7 +14,7 @@ const _config = (() => {
 	try {
 		Fs.accessSync(Path.resolve(cwd, filename));
 		try {
-			_config = require(Path.resolve(cwd, filename));
+			_config = Fs.readJsonSync(Path.resolve(cwd, filename));
 			_config = Object.assign(config, _config);
 		} catch (e) {
 			logger.error(".wxp.json is not a object");

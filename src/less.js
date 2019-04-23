@@ -1,6 +1,6 @@
 const Path = require("path");
 const Less = require("less");
-const Fs = require("fs");
+const Fs = require("fs-extra");
 const Px2rpx = require('px2rpx');
 const CleanCSS = require('clean-css');
 const Postcss = require("postcss");

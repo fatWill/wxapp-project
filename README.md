@@ -1,4 +1,4 @@
-![https://github.com/Jeff2Ma/WeApp-Workflow](images/wxp.jpeg)
+![https://github.com/fatWill/wxapp-project](images/wxp.jpeg)
 
 
 # wxapp-project
@@ -21,14 +21,14 @@ wxapp-project是一个小程序前端工程构建流的工具。
 > ✔︎ 自动压缩项目内png、jpg、jpeg、svg、gif文件
 > 
 > ✔︎ 腾讯云快速上传储存桶支持(cos对象存储)
+> 
+> ✔︎ 快速创建小程序模版文件
 
 ---
 
 > 更新预告:
 > 
-> ➟ 快速创建小程序模版文件
-> 
-> ➟ 腾讯云内容分发网络支持(cdn)
+> ➟ 阿里云快速上传储存桶支持(oss对象存储)
 > 
 > ...
 
@@ -76,7 +76,7 @@ npm i -g wxapp-project
 	   - `type` 类型，如`folder` `file` `glob`等
 	   - `value` 路径或取值，如`node_modules`
 	- `os` 对象存储的类型，可填写的值有`tx` 默认为`空`
-	- `osfiles` 选定需要对象存储的文件
+	- `osfiles` 你选定需要对象存储的文件
 		- `type` 类型，如`folder` `file` `glob`等
 	   - `value` 路径或取值，如`node_modules`
 	
@@ -92,9 +92,28 @@ npm i -g wxapp-project
 	
 	wxapp-project的核心，以小程序目录为根目录，运行`wxp run`命令，将会以项目运行目录为根目录进行监听编译。
 
+- ### `wxp setconfig <path>`
+	设置拷贝目录的配置，参数`path`为文件夹路径（注：必须为文件夹，可以选填为相对路径和绝对路径）.
+	- `-n --name` 选填参数 当你需要设置多个拷贝template时可以通过设置一个name值来标记，不设置默认name值为`defalut`
+
+	> 示例：wxp setconfig test/ -n test
+	>
+	> ![https://github.com/fatWill/wxapp-project](images/setconfig.jpeg)
+
+- ### `wxp getconfig`
+	可以查看你设置template的name值和对应的path。
+	
+	> 示例：wxp getconfig
+	>
+	> ![https://github.com/fatWill/wxapp-project](images/getconfig.jpeg)
+
 - ### `wxp new`
-	快速创建小程序工程（待更新）
-	过后我也会放几个样例模版供大家开发。
+	快速创建小程序工程
+	- `-n --name` 选填参数 选择对应name值的path进行拷贝，不设置默认name值为`defalut`
+	
+	> 示例：wxp new test2 -n test
+	>
+	> ![https://github.com/fatWill/wxapp-project](images/new.jpeg)
 
 
 # bug&tip

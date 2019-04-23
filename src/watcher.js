@@ -1,7 +1,7 @@
 const Chokidar = require('chokidar');
 const Path = require("path");
 const Glob = require("glob");
-const Fs = require("fs");
+const Fs = require("fs-extra");
 
 const logger = require("./logger");
 const less = require("./less");

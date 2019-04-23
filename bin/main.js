@@ -7,6 +7,7 @@ const package = require("../package");
 const watcher = require("../src/watcher");
 const help = require("../src/help");
 const init = require("../src/init");
+const tmp = require("../src/template");
 
 // 版本
 Program
@@ -30,18 +31,39 @@ Program
         watcher();
     });
 
+// new config
+Program
+    .command('setconfig <path>')
+    .description('config template path')
+    .option('-n, --name <n>', 'set config name')
+    .action((path, cmd) => {
+        // 设置模版配置
+        tmp.setconfig(path, cmd);
+    });
+
+// get config
+Program
+    .command('getconfig')
+    .action(() => {
+        // 获取模版配置
+        tmp.getConfig();
+    });
+
 // new
 Program
-    .command('new <dir>')
-    .description('new template, name is folder (expand)')
-    .action(function(name) {
-        console.log(name);
+    .command('new <name>')
+    .description('new template, argument is folder')
+    .option('-n, --name <n>', 'choose config name')
+    .action(function(name, cmd) {
+        // 拷贝文件
+        tmp.copy(name, cmd);
     });
 
 // help
 Program
     .command('help')
     .action(function(name) {
+        // 帮助信息
         help();
     });
 
