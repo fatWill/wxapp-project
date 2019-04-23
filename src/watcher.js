@@ -8,18 +8,19 @@ const less = require("./less");
 const minifyImage = require("./minify-image");
 const common = require("./common");
 const tools = require("./tools");
+const os = require("./os");
 
 const config = common.getConfig();
 
-// 处理忽略文件
-const dealIgnore = ignoreds => {
+// 处理配置的文件处理
+const dealFile = files => {
 	let result = [];
 
-	for (let ignored of ignoreds) {
+	for (let file of files) {
 		const {
 			type,
 			value
-		} = ignored;
+		} = file;
 
 		switch (type) {
 
@@ -50,75 +51,92 @@ const dealIgnore = ignoreds => {
 	return result;
 }
 
+const getFiles = async options => {
+	let ofiles = {};
+
+	if (!tools.isArray(options.files)) {
+		return ofiles;
+	};
+
+	let results = [];
+	let patterns = dealFile(options.files);
+	for (let pattern of patterns) {
+		const files = await new Promise((resolve, reject) => {
+			Glob(pattern, options.glob, (err, matches) => {
+				if (err) {
+					reject(err)
+				} else {
+					resolve(matches)
+				}
+			})
+		})
+
+		results = [...results, ...files];
+	}
+
+	// 创建忽略文件的对象映射
+	for (let result of results) {
+		Reflect.set(ofiles, result, Symbol());
+	}
+
+	return ofiles;
+}
+
 module.exports = async () => {
 
 	// less监听
 	if (config.less2wxss) {
-		(async () => {
-			if (!tools.isArray(config.ignore)) {
-				return [];
-			};
+		const ignoreFiles = await getFiles({
+			glob: {
+				ignore: "**/!(*.less)"
+			},
+			files: config.ignore
+		});
 
-			let result = [];
-			let ignore = dealIgnore(config.ignore);
-			for (let pattern of ignore) {
-				const files = await new Promise((resolve, reject) => {
-					Glob(pattern, {
-						ignore: "**/!(*.less)",
-					}, (err, matches) => {
-						if (err) {
-							reject(err)
-						} else {
-							resolve(matches)
-						}
-					})
-				})
+		const watcher = Chokidar.watch("**/*.less");
 
-				result = [...result, ...files];
-			}
+		watcher.on("add", async path => {
+			less.add(path, ignoreFiles);
+		});
 
-			return result;
+		watcher.on("change", async path => {
+			less.change(path, ignoreFiles);
+		});
 
-		})().then(res => {
-			// 创建忽略文件的对象映射
-			let ignoreFiles = {};
-			for (let ignoreFile of res) {
-				Reflect.set(ignoreFiles, ignoreFile, Symbol());
-			}
+		watcher.on("unlink", path => {
+			less.unlink(path);
+		});
+	}
 
-			const watcher = Chokidar.watch("**/*.less");
-
-			watcher.on("add", async path => {
-				less.add(path, ignoreFiles);
-			});
-
-			watcher.on("change", async path => {
-				less.change(path, ignoreFiles);
-			});
-
-			watcher.on("unlink", path => {
-				less.unlink(path);
-			});
-		})
+	// 对象存储
+	let osfiles = null;
+	if (config.os !== "") {
+		osfiles = await getFiles({
+			files: config.osfiles
+		});
 	}
 
 	// 图片转换监听
 	if (config.minifyImages) {
 		let ignore = [];
 		if (tools.isArray(config.ignore)) {
-			ignore = dealIgnore(config.ignore);
+			ignore = dealFile(config.ignore);
 		};
+
 		const watcher = Chokidar.watch("**/*.@(png|jpeg|jpg|svg|gif)", {
 			ignored: ignore,
 			followSymlinks: false,
 		});
 
 		watcher.on("add", async path => {
-			minifyImage(path);
+			await minifyImage(path);
+			osfiles && os(path, osfiles);
+
 		});
 
 		watcher.on("change", async path => {
-			minifyImage(path);
+			await minifyImage(path);
+			osfiles && os(path, osfiles);
 		});
 	}
 }

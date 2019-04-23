@@ -10,4 +10,5 @@ module.exports = {
 		type: 'folder',
 		value: 'node_modules',
 	}],
+	os: "", // object storge(对象存储)
 }

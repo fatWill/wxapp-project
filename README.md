@@ -20,14 +20,13 @@ wxapp-project是一个小程序前端工程构建流的工具。
 > 
 > ✔︎ 自动压缩项目内png、jpg、jpeg、svg、gif文件
 > 
+> ✔︎ 腾讯云快速上传储存桶支持(cos对象存储)
 
 ---
 
 > 更新预告:
 > 
 > ➟ 快速创建小程序模版文件
-> 
-> ➟ 腾讯云快速上传储存桶支持(cos对象存储)
 > 
 > ➟ 腾讯云内容分发网络支持(cdn)
 > 
@@ -63,6 +62,7 @@ npm i -g wxapp-project
 			'type': 'folder',
 			'value': 'node_modules',
 		}],
+		'os': ''
 	}
 	```
 	
@@ -75,8 +75,17 @@ npm i -g wxapp-project
 	- `ignore` 忽略监听文件
 	   - `type` 类型，如`folder` `file` `glob`等
 	   - `value` 路径或取值，如`node_modules`
+	- `os` 对象存储的类型，可填写的值有`tx` 默认为`空`
+	- `osfiles` 选定需要对象存储的文件
+		- `type` 类型，如`folder` `file` `glob`等
+	   - `value` 路径或取值，如`node_modules`
 	
-	其中`ignore`详细的使用方式和微信小程序`project.config.json`中的`ignore`忽略方法如出一辙，[点击此处查看](https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html?search-key=ignore)。（__注意__，less的忽略只是不打包成wxss。如a.less import b.less，b.less文件被忽略，那么b.less的保存还是会监听到并且会追溯到a的更新打包，只是b.less不打包成wxss），图片的监听忽略是不压缩
+	
+	*如果`os`类型填的是`tx`，那么需要配置的必填项为
+	- `secretId` `secretKey` `bucket` `region` 详见[腾讯云对象存储](https://cloud.tencent.com/document/product/436/8629#.E5.BF.AB.E9.80.9F.E5.85.A5.E9.97.A8)
+	
+	
+	其中`ignore`与`osfiles`的详细的使用方式和微信小程序`project.config.json`中的`ignore`忽略方法如出一辙，[点击此处查看](https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html?search-key=ignore)。（__注意__，less的忽略只是不打包成wxss。如a.less import b.less，b.less文件被忽略，那么b.less的保存还是会监听到并且会追溯到a的更新打包，只是b.less不打包成wxss），图片的监听忽略是不压缩
 	
 
 - ### `wxp run`
