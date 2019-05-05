@@ -1,0 +1,105 @@
+.toast-wrap {
+  position: fixed;
+  z-index: 19941116;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+.toast-wrap .toast-container {
+  max-width: 230rpx;
+  min-width: 196rpx;
+  position: relative;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 10rpx;
+  transform: translateY(14rpx);
+  padding: 36rpx 15rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.toast-wrap .toast-container.none {
+  min-width: auto;
+  padding: 20rpx 40rpx;
+  transform: none;
+}
+.toast-wrap .toast-container .icon.loading {
+  width: 128rpx;
+  height: 128rpx;
+  animation-name: load;
+  animation-duration: 1s;
+  animation-timing-function: steps(1);
+  animation-delay: 0;
+  animation-iteration-count: infinite;
+}
+@keyframes load {
+  8.333333333333332% {
+    transform: rotate(30deg);
+  }
+  16.666666666666664% {
+    transform: rotate(60deg);
+  }
+  25% {
+    transform: rotate(90deg);
+  }
+  33.33333333333333% {
+    transform: rotate(120deg);
+  }
+  41.66666666666667% {
+    transform: rotate(150deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  58.333333333333336% {
+    transform: rotate(210deg);
+  }
+  66.66666666666666% {
+    transform: rotate(240deg);
+  }
+  75% {
+    transform: rotate(270deg);
+  }
+  83.33333333333334% {
+    transform: rotate(300deg);
+  }
+  91.66666666666666% {
+    transform: rotate(330deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.toast-wrap .toast-container .icon.success,
+.toast-wrap .toast-container .icon.fail {
+  width: 128rpx;
+  height: 128rpx;
+}
+.toast-wrap .toast-container .text {
+  color: #fff;
+  font-size: 26rpx;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  letter-spacing: 2rpx;
+  word-break: break-all;
+}
+.toast-wrap .toast-mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  pointer-events: auto;
+}

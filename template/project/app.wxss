@@ -1,0 +1,238 @@
+view,
+scroll-view,
+swiper,
+swiper-item,
+movable-view,
+cover-view,
+icon,
+text,
+rich-text,
+progress,
+button,
+checkbox,
+form,
+input,
+label,
+picker,
+picker-view,
+radio,
+slider,
+switch,
+textarea,
+navgator,
+functional-page-navigator,
+audio,
+image,
+video,
+camera,
+live-player,
+live-pusher,
+map,
+canvas,
+open-data,
+web-view,
+ad {
+  box-sizing: border-box;
+}
+button {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+button::after {
+  border: none;
+}
+image {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+/**********************padding margin的常用值设置******************************/
+.ft-margin-xs {
+  margin-top: 10rpx;
+}
+.ft-margin-xs {
+  margin-left: 10rpx;
+}
+.ft-margin-xs {
+  margin-bottom: 10rpx;
+}
+.ft-margin-xs {
+  margin-right: 10rpx;
+}
+.ft-margin-sm {
+  margin-top: 20rpx;
+}
+.ft-margin-sm {
+  margin-left: 20rpx;
+}
+.ft-margin-sm {
+  margin-bottom: 20rpx;
+}
+.ft-margin-sm {
+  margin-right: 20rpx;
+}
+.ft-margin-md {
+  margin-top: 30rpx;
+}
+.ft-margin-md {
+  margin-left: 30rpx;
+}
+.ft-margin-md {
+  margin-bottom: 30rpx;
+}
+.ft-margin-md {
+  margin-right: 30rpx;
+}
+.ft-margin-lg {
+  margin-top: 40rpx;
+}
+.ft-margin-lg {
+  margin-left: 40rpx;
+}
+.ft-margin-lg {
+  margin-bottom: 40rpx;
+}
+.ft-margin-lg {
+  margin-right: 40rpx;
+}
+.ft-padding-xs {
+  padding-top: 10rpx;
+}
+.ft-padding-xs {
+  padding-left: 10rpx;
+}
+.ft-padding-xs {
+  padding-bottom: 10rpx;
+}
+.ft-padding-xs {
+  padding-right: 10rpx;
+}
+.ft-padding-sm {
+  padding-top: 20rpx;
+}
+.ft-padding-sm {
+  padding-left: 20rpx;
+}
+.ft-padding-sm {
+  padding-bottom: 20rpx;
+}
+.ft-padding-sm {
+  padding-right: 20rpx;
+}
+.ft-padding-md {
+  padding-top: 30rpx;
+}
+.ft-padding-md {
+  padding-left: 30rpx;
+}
+.ft-padding-md {
+  padding-bottom: 30rpx;
+}
+.ft-padding-md {
+  padding-right: 30rpx;
+}
+.ft-padding-lg {
+  padding-top: 40rpx;
+}
+.ft-padding-lg {
+  padding-left: 40rpx;
+}
+.ft-padding-lg {
+  padding-bottom: 40rpx;
+}
+.ft-padding-lg {
+  padding-right: 40rpx;
+}
+/*************************字体大小******************************/
+.ft-font-size-10 {
+  font-size: 10rpx;
+}
+.ft-font-size-11 {
+  font-size: 11rpx;
+}
+.ft-font-size-12 {
+  font-size: 12rpx;
+}
+.ft-font-size-13 {
+  font-size: 13rpx;
+}
+.ft-font-size-14 {
+  font-size: 14rpx;
+}
+.ft-font-size-15 {
+  font-size: 15rpx;
+}
+.ft-font-size-16 {
+  font-size: 16rpx;
+}
+.ft-font-size-17 {
+  font-size: 17rpx;
+}
+.ft-font-size-18 {
+  font-size: 18rpx;
+}
+.ft-font-size-19 {
+  font-size: 19rpx;
+}
+.ft-font-size-20 {
+  font-size: 20rpx;
+}
+.ft-font-size-21 {
+  font-size: 21rpx;
+}
+.ft-font-size-22 {
+  font-size: 22rpx;
+}
+.ft-font-size-23 {
+  font-size: 23rpx;
+}
+.ft-font-size-24 {
+  font-size: 24rpx;
+}
+.ft-font-size-25 {
+  font-size: 25rpx;
+}
+.ft-font-size-26 {
+  font-size: 26rpx;
+}
+.ft-font-size-27 {
+  font-size: 27rpx;
+}
+.ft-font-size-28 {
+  font-size: 28rpx;
+}
+.ft-font-size-29 {
+  font-size: 29rpx;
+}
+.ft-font-size-30 {
+  font-size: 30rpx;
+}
+.ft-font-size-31 {
+  font-size: 31rpx;
+}
+.ft-font-size-32 {
+  font-size: 32rpx;
+}
+.ft-font-size-33 {
+  font-size: 33rpx;
+}
+.ft-font-size-34 {
+  font-size: 34rpx;
+}
+.ft-font-size-35 {
+  font-size: 35rpx;
+}
+.ft-font-size-36 {
+  font-size: 36rpx;
+}
+/*************************字体对齐形式******************************/
+.ft-text-align-center {
+  text-align: center;
+}
+.ft-text-align-left {
+  text-align: left;
+}
+.ft-text-align-right {
+  text-align: right;
+}

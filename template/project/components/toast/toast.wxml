@@ -1,0 +1,18 @@
+<view wx:if="{{show}}" class="toast-wrap">
+	<view class="toast-container {{icon === 'success' || icon === 'loading' || icon === 'fail' ? '' : 'none'}}">
+		<block wx:if="{{image}}">
+			<view class="icon">
+				<image src="{{image}}" mode="scaleToFill"></image>
+			</view>
+		</block>
+		<block wx:else>
+			<block wx:if="{{icon === 'success' || icon === 'loading' || icon === 'fail'}}">
+				<view class="icon {{icon}}">
+					<image src="/images/{{icon}}.png" mode="scaleToFill"></image>
+				</view>
+			</block>
+		</block>
+		<view class="text">{{title}}</view>
+	</view>
+	<view wx:if="{{mask}}" class="toast-mask" catch:touchmove></view>
+</view>

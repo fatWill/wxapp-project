@@ -1,0 +1,14 @@
+<view class="wrap">
+	<!-- 公共头部 -->
+    <view class="header">
+        <navigation id="ft-navigation"></navigation>
+    </view>
+    <!-- 公共内容区 -->
+    <view class='container'>
+    	<slot></slot>
+    </view>
+    <!-- 公共底部 -->
+    <view class="footer"></view>
+</view>
+<modal id="ft-modal"></modal>
+<toast id="ft-toast"></toast>

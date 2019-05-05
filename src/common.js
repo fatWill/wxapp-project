@@ -1,5 +1,6 @@
 const Path = require("path");
 const Fs = require("fs-extra");
+const PkgDir = require('pkg-dir');
 
 const config = require("./config");
 const logger = require("./logger");
@@ -44,5 +45,9 @@ module.exports = {
 
 	getFileName() {
 		return filename;
+	},
+
+	getRootPath() {
+		return PkgDir.sync(__dirname);
 	}
 }

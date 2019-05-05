@@ -10,8 +10,6 @@ const name = common.getName();
 const cache = FileEntryCache.create(name, undefined, true);
 
 module.exports = (path, osfiles) => {
-	if (!Reflect.has(osfiles, path)) return;
-
 	switch (config.os) {
 		case "tx":
 			cos(path);
@@ -41,11 +39,11 @@ const cos = (path) => {
 			FilePath: path,
 		}, function(err, data) {
 			if (err) {
-				logger.error("cos: upload images error")
+				logger.error(`${path}: cos upload images error`)
 				logger.error(err)
 			}else{
 				cache.reconcile();
-				logger.success("cos: upload images success")
+				logger.success(`${path}: cos upload images success`)
 			}
 		});
 	}

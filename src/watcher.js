@@ -1,6 +1,7 @@
 const Chokidar = require('chokidar');
 const Path = require("path");
 const Glob = require("glob");
+const FG = require("fast-glob");
 const Fs = require("fs-extra");
 
 const logger = require("./logger");
@@ -11,6 +12,11 @@ const tools = require("./tools");
 const os = require("./os");
 
 const config = common.getConfig();
+const cwd = common.getCWD();
+
+/**
+ * 有点乱，过后再整理下
+ */
 
 // 处理配置的文件处理
 const dealFile = files => {
@@ -49,6 +55,25 @@ const dealFile = files => {
 	}
 
 	return result;
+}
+
+// 曲线救国
+const globHasFile = async options => {
+	let patterns = dealFile(options.patterns);
+
+	patterns = patterns.map(value => {
+		return "!" + value;
+	})
+
+	patterns = [...patterns, options.files]
+
+	let result = await FG(patterns);
+
+	if (result.length > 0) {
+		return false
+	} else {
+		return true
+	}
 }
 
 const getFiles = async options => {
@@ -114,6 +139,39 @@ module.exports = async () => {
 		osfiles = await getFiles({
 			files: config.osfiles
 		});
+
+		if (tools.isArray(config.osfiles)) {
+			try {
+				const json = Path.resolve(cwd, "project.config.json");
+				const data = Fs.readJsonSync(json);
+				const packOptions = data.packOptions || {};
+				const ignore = packOptions.ignore || [];
+
+				// 对象去重
+				const _ignore = [...ignore, ...config.osfiles].map(value => {
+						if (tools.isObject(value)) {
+							return JSON.stringify(value)
+						} else {
+							return ''
+						}
+					})
+					.filter((value, index, arr) => {
+						return value !== '' && arr.indexOf(value) === index;
+					})
+					.map(value => {
+						return JSON.parse(value)
+					});
+
+				Fs.writeJsonSync(json, Object.assign(data, Object.assign(packOptions, {
+					ignore: _ignore
+				})), {
+					spaces: "    "
+				})
+			} catch (e) {
+				//
+				console.log(e)
+			}
+		}
 	}
 
 	// 图片转换监听
@@ -125,18 +183,28 @@ module.exports = async () => {
 
 		const watcher = Chokidar.watch("**/*.@(png|jpeg|jpg|svg|gif)", {
 			ignored: ignore,
-			followSymlinks: false,
+			followSymlinks: false
 		});
 
-		watcher.on("add", async path => {
-			await minifyImage(path);
-			osfiles && os(path, osfiles);
+		const operate = async path => {
+			await minifyImage(path).catch(rej => {
+				logger.error(rej);
+			});
 
+			const has = await globHasFile({
+				files: path,
+				patterns: config.osfiles,
+			});
+
+			has && osfiles && os(path, osfiles);
+		}
+
+		watcher.on("add", async path => {
+			operate(path);
 		});
 
 		watcher.on("change", async path => {
-			await minifyImage(path);
-			osfiles && os(path, osfiles);
+			operate(path);
 		});
 	}
 }

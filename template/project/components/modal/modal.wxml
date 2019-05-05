@@ -1,0 +1,12 @@
+<!--components/modal/modal.wxml-->
+<view wx:if="{{show}}" class="modal-wrap">
+	<view class="modal-container">
+		<view wx:if="{{title}}" class="title">{{title}}</view>
+		<view class="content">{{content}}</view>
+		<view class="button">
+			<button open-type="{{opt}}" wx:if="{{showCancel}}" catch:tap="cancel" class="cancel">{{cancelText}}</button>
+			<button open-type="{{opt}}" catch:tap="confirm" class="confirm">{{confirmText}}</button>
+		</view>
+	</view>
+	<view class="modal-mask" catch:tap="{{shadowClose ? 'cancel' : ''}}" catch:touchmove></view>
+</view>

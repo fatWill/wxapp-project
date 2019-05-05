@@ -52,11 +52,15 @@ Program
 // new
 Program
     .command('new <name>')
-    .description('new template, argument is folder')
-    .option('-n, --name <n>', 'choose config name')
-    .action(function(name, cmd) {
+    .description('quick create miniprogram template, name is [folder|file] name')
+    .option('-n, --name <name>', 'name is your config key')
+    .option('-f, --from [name]', 'from is name by "demo|page|component|project|js|wxml|less|json')
+    .action(async function(name, cmd) {
+        // 创建自带的template文件
+        await tmp.create(name, cmd);
+
         // 拷贝文件
-        tmp.copy(name, cmd);
+        await tmp.copy(name, cmd);
     });
 
 // help
@@ -70,7 +74,7 @@ Program
 Program
     .on('--help', () => {
         console.log()
-        console.log(``)
+        console.log(`Please give me a star support on my github`)
         console.log()
     })
 

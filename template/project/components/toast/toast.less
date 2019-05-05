@@ -1,0 +1,95 @@
+.toast-wrap{
+	position: fixed;
+	z-index: 19941116;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	margin: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+	
+	.toast-container{
+		max-width: 230rpx;
+		min-width: 196rpx;
+		position: relative;
+		z-index: 2;
+		background-color: rgba(0, 0, 0, .6);
+		border-radius: 10rpx;
+		transform: translateY(14rpx);
+		padding: 36rpx 15rpx;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		&.none{
+			min-width: auto;
+			padding: 20rpx 40rpx;
+			transform: none;
+		}
+
+		.icon{
+			
+			.wh(){
+				width: 128rpx;
+				height: 128rpx;
+			}
+
+			&.loading{
+				.wh();
+				@name: load;
+
+				animation-name: @name;
+				animation-duration: 1s;
+				animation-timing-function: steps(1);
+				animation-delay: 0;
+				animation-iteration-count: infinite;
+				
+				.keyframes(@min: 1, @max: 12) when (@min <= @max){
+					@n: @min / @max;
+					@penc: unit(@n * 100, %);
+					
+					@{penc} {
+						transform: rotate(unit(360 * @n, deg));
+					}
+
+					.keyframes(@min + 1);
+				}
+
+				@keyframes @name{
+					.keyframes();
+				}
+			}
+
+			&.success, &.fail{
+				.wh();
+			}
+		}
+
+		.text{
+			color: #fff;
+			font-size: 26rpx;
+			display: flex;
+			justify-content: center;
+			text-align: center;
+			letter-spacing: 2rpx;
+			word-break: break-all;
+		}
+	}
+
+	.toast-mask{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		margin: auto;
+		pointer-events: auto;
+	}
+}

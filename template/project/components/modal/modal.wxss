@@ -1,0 +1,82 @@
+.modal-wrap {
+  position: fixed;
+  z-index: 19941116;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-wrap .modal-container {
+  max-width: 600rpx;
+  min-width: 500rpx;
+  position: relative;
+  z-index: 2;
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+.modal-wrap .modal-container .title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  line-height: 80rpx;
+  height: 80rpx;
+  font-size: 30rpx;
+  background-color: #333;
+  color: #fff;
+  overflow: hidden;
+  word-break: break-all;
+  padding: 0 60rpx;
+}
+.modal-wrap .modal-container .content {
+  width: 100%;
+  background-color: #f7f7f7;
+  padding: 30rpx;
+  font-size: 34rpx;
+  line-height: 1.4;
+  text-align: center;
+  word-break: break-all;
+}
+.modal-wrap .modal-container .button {
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  border-top: 1px solid #ddd;
+  background-color: #f7f7f7;
+}
+.modal-wrap .modal-container .button button {
+  flex: 1;
+  height: 100%;
+  border-radius: 0;
+  font-size: 28rpx;
+  line-height: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-wrap .modal-container .button button + button {
+  border-left: 1px solid #ddd;
+}
+.modal-wrap .modal-container .button button.cancel {
+  color: #999;
+}
+.modal-wrap .modal-mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  pointer-events: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+}

@@ -1,0 +1,18 @@
+{
+    "less2wxss": true,
+    "px2rpx": false,
+    "minifyImages": true,
+    "minifyWxss": false,
+    "rpxUnit": 1,
+    "inlineUrl": false,
+    "ignore": [
+        {
+            "type": "folder",
+            "value": "node_modules"
+        },
+        {
+            "type": "glob",
+            "value": "less/*.less"
+        }
+    ]
+}

@@ -1,0 +1,14 @@
+{
+  "name": "wxapp",
+  "version": "1.0.0",
+  "description": "最低版本兼容为1.6.3",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "fatwill",
+  "license": "ISC"
+}

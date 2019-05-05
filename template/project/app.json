@@ -1,0 +1,19 @@
+{
+    "pages": [
+        "major/pages/index/index"
+    ],
+    "window": {
+        "navigationStyle": "custom",
+        "navigationBarTextStyle": "black"
+    },
+    "usingComponents": {
+        "container": "/components/container/container",
+        "modal": "/components/modal/modal"
+    },
+    "permission": {
+        "scope.userLocation": {
+            "desc": "你的位置信息将用于位置匹配"
+        }
+    },
+    "debug": true
+}

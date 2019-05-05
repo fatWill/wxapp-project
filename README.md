@@ -4,6 +4,10 @@
 # wxapp-project
 wxapp-project是一个小程序前端工程构建流的工具。
 
+
+>增加了小程序的demo文件和程序的架构设计，在template/下，供大家一起学习交流。
+
+
 ---
 
 >目前已经支持:
@@ -32,7 +36,6 @@ wxapp-project是一个小程序前端工程构建流的工具。
 > 
 > ...
 
----
 
 # 安装&使用
 ```
@@ -44,7 +47,7 @@ npm i -g wxapp-project
 - 查看更多帮助信息请使用`wxp -h`
 
 
-# 详细使用说明
+# 使用说明
 
 - ### `wxp init`
 
@@ -87,11 +90,27 @@ npm i -g wxapp-project
 	
 	其中`ignore`与`osfiles`的详细的使用方式和微信小程序`project.config.json`中的`ignore`忽略方法如出一辙，[点击此处查看](https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html?search-key=ignore)。（__注意__，less的忽略只是不打包成wxss。如a.less import b.less，b.less文件被忽略，那么b.less的保存还是会监听到并且会追溯到a的更新打包，只是b.less不打包成wxss），图片的监听忽略是不压缩
 	
+---
+	
 
 - ### `wxp run`
 	
 	wxapp-project的核心，以小程序目录为根目录，运行`wxp run`命令，将会以项目运行目录为根目录进行监听编译。
 
+---
+
+>有时候你需要能够快速创建某些自定义项目的文件(比如自定义快速创建wxml less js)
+>
+>通过以下几个命令(wxp setconfig, wxp new)，你可以通过配置本地的一个template文件夹
+>
+>配置好相对应的路径和对应的template name
+>
+>那么你就可以通过命令行快速创建对应template name的文件
+>
+>详细介绍请看如下
+
+	
+	
 - ### `wxp setconfig <path>`
 	设置拷贝目录的配置，参数`path`为文件夹路径（注：必须为文件夹，可以选填为相对路径和绝对路径）.
 	- `-n --name` 选填参数 当你需要设置多个拷贝template时可以通过设置一个name值来标记，不设置默认name值为`defalut`
@@ -115,9 +134,9 @@ npm i -g wxapp-project
 	
 	---
 
-- ### `wxp new`
-	快速创建小程序工程
-	- `-n --name` 选填参数 选择对应name值的path进行拷贝，不设置默认name值为`defalut`
+- ### `wxp new <name>`
+	快速创建小程序工程，`name`值是创建（文件|文件夹）的名字
+	- `-n --name` 参数必填 选择对应name值的path进行拷贝
 
 	---
 	
@@ -125,8 +144,12 @@ npm i -g wxapp-project
 	>
 	> ![https://github.com/fatWill/wxapp-project](images/new.jpeg)
 	
+	
+	- `-f --from` 参数选填， 这个项目中template/下的模版，支持的参数有`demo|page|component|project|js|wxml|less|json`，不填默认为`demo`
+	
+	[点击此处](https://developers.weixin.qq.com/s/T7Hxu8m17q8W)可以查看`demo`的小程序模版代码片段
+		
 	---
-
 
 # bug&tip
 * 欢迎在issue中提出

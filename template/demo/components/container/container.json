@@ -1,0 +1,8 @@
+{
+    "component": true,
+    "usingComponents": {
+    	"navigation": "/components/navigation/navigation",
+    	"modal": "/components/modal/modal",
+    	"toast": "/components/toast/toast"
+    }
+}

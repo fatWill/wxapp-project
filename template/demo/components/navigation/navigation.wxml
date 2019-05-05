@@ -1,0 +1,25 @@
+<view wx:if="{{show}}" class="header">
+	
+	<!-- 设置背景色和背景图片 -->
+	<view class="background" style="background-color:{{backgroundColor}};">
+		<image class="" src="{{backgroundImage}}" mode="scaleToFill"></image>
+	</view>
+
+	<!-- 状态栏高度 -->
+	<view style="height: {{headerInfo.statusBarHeight}}px;"></view>
+	<!-- 导航栏 -->
+	<view class="navigation" style="height: {{headerInfo.navigationHeight}}px;padding: {{headerInfo.statusBarDistance}}px {{headerInfo.capsuleRight}}px">
+		<!-- 左边的主菜单栏 -->
+		<view wx:if="{{menuShow}}" class="navigation-left" bind:tap="{{menuTap}}">
+			<image wx:if="{{menuImage}}" src="{{menuImage}}" mode="aspectFit"></image>
+		</view>
+
+		<!-- 主内容区 -->
+		<view class="navigation-content" style="color: {{titleColor}};">
+			<text>{{title}}</text>
+		</view>
+
+		<!-- 右边胶囊的宽度 -->
+		<!-- <view class="navigation-right" style="width: {{headerInfo.capsuleMaxWidth}} rpx "></view> -->
+	</view>
+</view>

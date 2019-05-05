@@ -1,0 +1,110 @@
+view, 
+scroll-view, 
+swiper,
+swiper-item, 
+movable-view, 
+cover-view, 
+icon, 
+text, 
+rich-text, 
+progress, 
+button, 
+checkbox, 
+form, 
+input, 
+label, 
+picker, 
+picker-view, 
+radio, 
+slider, 
+switch, 
+textarea, 
+navgator, 
+functional-page-navigator,
+audio,
+image,
+video,
+camera,
+live-player,
+live-pusher,
+map,
+canvas,
+open-data,
+web-view,
+ad{
+	box-sizing: border-box;
+}
+
+button{
+	border: none;
+	padding: 0;
+	background: transparent;
+
+	&::after{
+		border: none;
+	}
+}
+
+image{
+	width: 100%;
+	height: 100%;
+	display: block;
+}
+
+@globalPrefix: ft;
+
+/**********************padding margin的常用值设置******************************/
+//参数：sp_prop是大小的属性，sp_dire是方向，sp_multi是倍数
+//使用方式 fq-margin-xs 即为margin:10rpx 以此类推
+@sp_prop: xs, sm, md, lg;
+@sp_dire: top, left, bottom, right;
+@sp_mult: 10;
+// 基础值设置
+.spacingBase (@type, @sp_dire, @sp_prop, @v) {
+	.@{globalPrefix}-@{type}-@{sp_prop}{
+		@{type}-@{sp_dire}: @v;
+	}
+}
+
+// 遍历方向
+.spacingDire (@sp_prop, @v, @type, @n: 1) when (@n <= length(@sp_dire)) {
+	.spacingBase(@type, extract(@sp_dire, @n), @sp_prop, @v);
+	.spacingDire(@sp_prop, @v, @type, @n+1);
+}
+
+// 遍历属性
+.spacingProp (@type, @n: 1) when (@n <= length(@sp_prop)) {
+	.spacingDire(extract(@sp_prop, @n), @sp_mult * @n * 1rpx, @type);
+	.spacingProp(@type, @n+1);
+}
+
+.spacingProp(margin);
+.spacingProp(padding);
+
+
+/*************************字体大小******************************/
+// 使用方式 fq-font-size-xx (xx为需要的像素值，取值10-36之间)
+.fontSizeSet (@min, @max) when (@min <= @max) {
+	.@{globalPrefix}-font-size-@{min}{
+		font-size: @min * 1rpx
+	}
+	.fontSizeSet(@min+1, @max);
+}
+.fontSizeSet(10, 36);
+
+
+/*************************字体对齐形式******************************/
+// 使用方式 fq-text-align-center 字体中间对齐，以此类推
+@f_align: center, left, right;
+.fontAlignBase (@align){
+	.@{globalPrefix}-text-align-@{align}{
+		text-align: @align
+	}
+}
+
+.fontAlignSet (@n: 1) when (@n <= length(@f_align)) {
+	.fontAlignBase(extract(@f_align, @n));
+	.fontAlignSet(@n+1);
+}
+
+.fontAlignSet();

@@ -1,0 +1,10 @@
+.container {
+  padding: 60rpx 30rpx;
+}
+.container .btn {
+  background-color: #179B16;
+  color: #fff;
+}
+.container .btn + .btn {
+  margin-top: 10rpx;
+}

@@ -1,0 +1,9 @@
+<container>
+	<view class="container">
+		<button bind:tap="modal" class="btn modal">点击查看modal</button>
+		<button bind:tap="toast" class="btn toast">点击查看toast</button>
+		<button bind:tap="loading" class="btn loading">点击查看loading</button>
+		<button bind:tap="hideLoading" class="btn loading">点击隐藏loading</button>
+		<button bind:tap="navigation" class="btn navigation">点击更改导航栏标题</button>
+	</view>
+</container>

@@ -1,0 +1,11 @@
+<container>
+	<view class="container">
+		<view class="userinfo">
+			<open-data type="userAvatarUrl" class="userinfo-avatar" bind:tap="showDemo"></open-data>
+			<open-data type="userNickName" class="userinfo-nickname"></open-data>
+		</view>
+		<view class="usermotto">
+			<text class="user-motto">{{motto}}</text>
+		</view>
+	</view>
+</container>
