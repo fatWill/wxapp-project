@@ -25,8 +25,6 @@ It only covers the most common items, and tries to guess sensible defaults.
 
 		const content = JSON.stringify(nconfig, null, '    ');
 
-		const cwd = process.cwd();
-
 		const file = Path.resolve(cwd, fileName);
 
 		return {
@@ -168,13 +166,13 @@ It only covers the most common items, and tries to guess sensible defaults.
 					} else {
 						logger.log(`created ok!`);
 					}
-					process.exit();
+					process.exit(0);
 				})
 
 				break;
 			default:
 				logger.log('Aborted.');
-				process.exit();
+				process.exit(0);
 				break;
 		}
 	})

@@ -9,7 +9,7 @@ const config = common.getConfig();
 const name = common.getName();
 const cache = FileEntryCache.create(name, undefined, true);
 
-module.exports = (path, osfiles) => {
+module.exports = path => {
 	switch (config.os) {
 		case "tx":
 			cos(path);

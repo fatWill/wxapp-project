@@ -51,7 +51,7 @@ npm i -g wxapp-project
 
 - ### `wxp init`
 
-	将会在当前目前下创建.wxp.json配置文件
+	将会在当前目录下创建.wxp.json配置文件（*注：必须要在每个小程序下面的根目录创建此文件）
 	
 	```
 	{
@@ -78,6 +78,9 @@ npm i -g wxapp-project
 	- `ignore` 忽略监听文件
 	   - `type` 类型，如`folder` `file` `glob`等
 	   - `value` 路径或取值，如`node_modules`
+	- `template` 模版文件（用于快速创建小程序模版，详细用法如下）
+      - `type` 类型，值为`page|component|project|js|wxml|less|json`
+      - `path` 路径，如 `page/example`
 	- `os` 对象存储的类型，可填写的值有`tx` 默认为`空`
 	- `osfiles` 你选定需要对象存储的文件
 		- `type` 类型，如`folder` `file` `glob`等
@@ -101,38 +104,35 @@ npm i -g wxapp-project
 
 >有时候你需要能够快速创建某些自定义项目的文件(比如自定义快速创建wxml less js)
 >
->通过以下几个命令(wxp setconfig, wxp new)，你可以通过配置本地的一个template文件夹
+>比如你需要快速创建一个page文件，里面有自定义的通用方法和模版等，示例文件路径如下
 >
->配置好相对应的路径和对应的template name
+> ```
+> ├── page
+>   ├── page.wxml                                     
+>   ├── page.less                                       
+>   ├── page.js                                  
+>   ├── page.json
+> ├── app.json
+> ├──...     
+> ```
+>
+>然后在.wxp.json中配置如下
+>
+> ```
+> "template": {
+>   "test": {                                    
+>     "type": "page",                                      
+>     "path": "page"    //基于项目目录的相对路径                              
+>   }
+> },
+> ```
 >
 >那么你就可以通过命令行快速创建对应template name的文件
 >
+>命令行示例 `wxp new filename -n test` // 其中filename 为你创建的文件名， test为上面配置的key值
+>
 >详细介绍请看如下
 
-	
-	
-- ### `wxp setconfig <path>`
-	设置拷贝目录的配置，参数`path`为文件夹路径（注：必须为文件夹，可以选填为相对路径和绝对路径）.
-	- `-n --name` 选填参数 当你需要设置多个拷贝template时可以通过设置一个name值来标记，不设置默认name值为`defalut`
-		
-	---
-
-	> 示例：wxp setconfig test/ -n test
-	>
-	> ![https://github.com/fatWill/wxapp-project](images/setconfig.jpeg)
-	
-	---
-
-- ### `wxp getconfig`
-	可以查看你设置template的name值和对应的path。
-	
-	---
-	
-	> 示例：wxp getconfig
-	>
-	> ![https://github.com/fatWill/wxapp-project](images/getconfig.jpeg)
-	
-	---
 
 - ### `wxp new <name>`
 	快速创建小程序工程，`name`值是创建（文件|文件夹）的名字
@@ -145,7 +145,7 @@ npm i -g wxapp-project
 	> ![https://github.com/fatWill/wxapp-project](images/new.jpeg)
 	
 	
-	- `-f --from` 参数选填， 这个项目中template/下的模版，支持的参数有`demo|page|component|project|js|wxml|less|json`，不填默认为`demo`
+	- `-f --from` 参数选填， 快速创建这个项目中template/下的模版，支持的参数有`demo|page|component|project|js|wxml|less|json`，不填默认为`demo`
 	
 	[点击此处](https://developers.weixin.qq.com/s/T7Hxu8m17q8W)可以查看`demo`的小程序模版代码片段
 		

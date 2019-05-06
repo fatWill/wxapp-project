@@ -31,24 +31,6 @@ Program
         watcher();
     });
 
-// new config
-Program
-    .command('setconfig <path>')
-    .description('config template path')
-    .option('-n, --name <n>', 'set config name')
-    .action((path, cmd) => {
-        // 设置模版配置
-        tmp.setconfig(path, cmd);
-    });
-
-// get config
-Program
-    .command('getconfig')
-    .action(() => {
-        // 获取模版配置
-        tmp.getConfig();
-    });
-
 // new
 Program
     .command('new <name>')
@@ -56,11 +38,7 @@ Program
     .option('-n, --name <name>', 'name is your config key')
     .option('-f, --from [name]', 'from is name by "demo|page|component|project|js|wxml|less|json')
     .action(async function(name, cmd) {
-        // 创建自带的template文件
-        await tmp.create(name, cmd);
-
-        // 拷贝文件
-        await tmp.copy(name, cmd);
+        tmp(name, cmd);
     });
 
 // help

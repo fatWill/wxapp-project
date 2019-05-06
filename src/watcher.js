@@ -21,7 +21,6 @@ const cwd = common.getCWD();
 // 处理配置的文件处理
 const dealFile = files => {
 	let result = [];
-
 	for (let file of files) {
 		const {
 			type,
@@ -191,12 +190,14 @@ module.exports = async () => {
 				logger.error(rej);
 			});
 
-			const has = await globHasFile({
-				files: path,
-				patterns: config.osfiles,
-			});
+			if (config.osfiles) {
+				const has = await globHasFile({
+					files: path,
+					patterns: config.osfiles,
+				});
 
-			has && osfiles && os(path, osfiles);
+				has && os(path);
+			}
 		}
 
 		watcher.on("add", async path => {
