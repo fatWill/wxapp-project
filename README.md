@@ -49,7 +49,7 @@ npm i -g wxapp-project
 
 # 使用说明
 
-- ### `wxp init`
+* ### `wxp init`
 
 	将会在当前目录下创建.wxp.json配置文件（*注：必须要在每个小程序下面的根目录创建此文件）
 	
@@ -96,7 +96,7 @@ npm i -g wxapp-project
 ---
 	
 
-- ### `wxp run`
+* ### `wxp run`
 	
 	wxapp-project的核心，以小程序目录为根目录，运行`wxp run`命令，将会以项目运行目录为根目录进行监听编译。
 
@@ -129,27 +129,29 @@ npm i -g wxapp-project
 >
 >那么你就可以通过命令行快速创建对应template name的文件
 >
->命令行示例 `wxp new filename -n test` // 其中filename 为你创建的文件名， test为上面配置的key值
+>命令行示例 `wxp create test -n filename` // 其中filename 为你创建的文件名， test为上面配置的key值
 >
 >详细介绍请看如下
 
+* ### `wxp new <type>`
 
-- ### `wxp new <name>`
-	快速创建小程序工程，`name`值是创建（文件|文件夹）的名字
-	- `-n --name` 参数必填 选择对应name值的path进行拷贝
-
-	---
+	快速创建`wxp项目`中的小程序工程，`type`值有`demo|page|component|project|js|wxml|less|json`
+	- `-n --name` 参数必填 文件/文件夹名
 	
-	> 示例：wxp new test2 -n test
-	>
-	> ![https://github.com/fatWill/wxapp-project](images/new.jpeg)
-	
-	
-	- `-f --from` 参数选填， 快速创建这个项目中template/下的模版，支持的参数有`demo|page|component|project|js|wxml|less|json`，不填默认为`demo`
+	> 示例 `wxp new page -n filename`
 	
 	[点击此处](https://developers.weixin.qq.com/s/T7Hxu8m17q8W)可以查看`demo`的小程序模版代码片段
+	
+---
 		
-	---
+* ### `wxp create <key>`
+
+	快速创建`自己配置项目`中的小程序工程，`key`值为你template配置中的key，workflow会找出相对应的的路径进行创建
+	- `-n --name` 参数必填 文件/文件夹名
+	
+	> 示例 `wxp create test -n filename`
+		
+---
 
 # bug&tip
 * 欢迎在issue中提出
