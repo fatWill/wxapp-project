@@ -31,14 +31,25 @@ Program
         watcher();
     });
 
-// new
+/**
+ * create 和new的区别在于 new创建的是wxp项目中的文件
+ */
+// new 
 Program
-    .command('new <name>')
-    .description('quick create miniprogram template, name is [folder|file] name')
-    .option('-n, --name <name>', 'name is your config key')
-    .option('-f, --from [name]', 'from is name by "demo|page|component|project|js|wxml|less|json')
-    .action(async function(name, cmd) {
-        tmp(name, cmd);
+    .command('new <type>')
+    .description('quick create miniprogram template(from wxp), type value: "demo|page|component|project|js|wxml|less|json')
+    .option('-n, --name <name>', 'name value: "folder|file"')
+    .action(async function(type, cmd) {
+        tmp.new(type, cmd.name);
+    });
+
+// create
+Program
+    .command('create <key>')
+    .description('quick create miniprogram template(from your project), type value is your project by config template key')
+    .option('-n, --name <name>', 'name value: "folder|file"')
+    .action(async function(key, cmd) {
+        tmp.create(key, cmd.name);
     });
 
 // help

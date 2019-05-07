@@ -121,37 +121,8 @@ const qcFile = async (name, resource) => {
 	}
 };
 
-module.exports = async (name, cmd) => {
-	let tname = "demo"; // type类型 说明创建什么类型的模版
-	let resource = ""; // 文件的源路径
-
-	if (tools.isString(cmd.name)) {
-		try {
-			const name = cmd.name;
-			const wxpJSON = Path.resolve(project, filePath);
-			const json = Fs.readJsonSync(wxpJSON); // .wxp.json数据
-			if (tools.isObject(json.template)) {
-				const data = Reflect.get(json.template, name);
-				if (data && data.path && data.type) {
-					tname = data.type;
-					resource = Path.resolve(project, data.path);
-				} else {
-					logger.error(".wxp.json template value: ");
-					logger.error(JSON.stringify(json.template, null, "    "));
-					throw new Error(`.wxp.json: name value(${name}) is error`);
-				}
-			} else {
-				throw new Error(".wxp.json: template is not a object");
-			}
-		} catch (e) {
-			logger.error(e);
-			process.exit(0);
-		}
-	} else if (tools.isString(cmd.from)) {
-		tname = cmd.from;
-	}
-
-	switch (tname) {
+const create = async (type, name, resource) => {
+	switch (type) {
 		case "demo":
 		default:
 			resource = resource ? resource : Path.resolve(rootPath, "template/demo");
@@ -193,4 +164,40 @@ module.exports = async (name, cmd) => {
 			qcFile(name, resource);
 			break;
 	}
+}
+
+const _create = async (key = "", name) => {
+	let type = "";
+	let resource = ""; // 文件的源路径
+	try {
+		const wxpJSON = Path.resolve(project, filePath);
+		const json = Fs.readJsonSync(wxpJSON); // .wxp.json数据
+		if (tools.isObject(json.template)) {
+			const data = Reflect.get(json.template, key);
+			if (data && data.path && data.type) {
+				type = data.type;
+				resource = Path.resolve(project, data.path);
+			} else {
+				logger.error(".wxp.json template value: ");
+				logger.error(JSON.stringify(json.template, null, "    "));
+				throw new Error(`.wxp.json: name value(${name}) is error`);
+			}
+		} else {
+			throw new Error(".wxp.json: template is not a object");
+		}
+	} catch (e) {
+		logger.error(e);
+		process.exit(0);
+	}
+
+	create(type, name, resource);
+}
+
+const _new = async (type, name) => {
+	create(type, name);
+}
+
+module.exports = {
+	new: _new,
+	create: _create
 }
