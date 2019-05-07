@@ -1,9 +1,10 @@
 // 对象存储
 const COS = require('cos-nodejs-sdk-v5');
+const Path = require('path');
+const FileEntryCache = require('file-entry-cache');
 
 const logger = require("./logger");
 const common = require("./common");
-const FileEntryCache = require('file-entry-cache');
 
 const config = common.getConfig();
 const name = common.getName();
@@ -17,6 +18,7 @@ module.exports = path => {
 	}
 }
 
+// 腾讯cos
 const cos = (path) => {
 	const hasFileChanged = cache.hasFileChanged(path);
 
@@ -32,15 +34,20 @@ const cos = (path) => {
 			SecretKey: config.secretKey
 		});
 
+		const Bucket = config.bucket;
+		const Region = config.region;
+		const FilePath = path;
+		const Key = path.split(Path.sep).join('/');
+
 		_cos.sliceUploadFile({
-			Bucket: config.bucket,
-			Region: config.region,
-			Key: path,
-			FilePath: path,
+			Bucket,
+			Region,
+			Key,
+			FilePath,
 		}, function(err, data) {
 			if (err) {
 				logger.error(`${path}: cos upload images error`)
-				logger.error(err)
+				logger.error(JSON.stringify(err, null, "    "))
 			}else{
 				cache.reconcile();
 				logger.success(`${path}: cos upload images success`)

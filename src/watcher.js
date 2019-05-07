@@ -138,39 +138,6 @@ module.exports = async () => {
 		osfiles = await getFiles({
 			files: config.osfiles
 		});
-
-		if (tools.isArray(config.osfiles)) {
-			try {
-				const json = Path.resolve(cwd, "project.config.json");
-				const data = Fs.readJsonSync(json);
-				const packOptions = data.packOptions || {};
-				const ignore = packOptions.ignore || [];
-
-				// 对象去重
-				const _ignore = [...ignore, ...config.osfiles].map(value => {
-						if (tools.isObject(value)) {
-							return JSON.stringify(value)
-						} else {
-							return ''
-						}
-					})
-					.filter((value, index, arr) => {
-						return value !== '' && arr.indexOf(value) === index;
-					})
-					.map(value => {
-						return JSON.parse(value)
-					});
-
-				Fs.writeJsonSync(json, Object.assign(data, Object.assign(packOptions, {
-					ignore: _ignore
-				})), {
-					spaces: "    "
-				})
-			} catch (e) {
-				//
-				console.log(e)
-			}
-		}
 	}
 
 	// 图片转换监听

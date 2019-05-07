@@ -46,13 +46,15 @@ const appJsonAddPage = async path => {
 
 	const appJSON = Path.resolve(project, "app.json");
 
-	const rexp = new RegExp(`^${project}/+`, "u");
-	const absoultePath = relativePath.replace(rexp, "");
+	const _project = project.split(Path.sep);
+	const _relativePath = relativePath.split(Path.sep);
+
+	const absoultePath = _relativePath.filter(value => !_project.includes(value));
 
 	const data = Fs.readJsonSync(appJSON); // app.json数据
 	const pages = data.pages; // app.json中页面配置的数组
 	Fs.writeJson(appJSON, Object.assign(data, {
-		pages: [...new Set([...pages, absoultePath])],
+		pages: [...new Set([...pages, absoultePath.join("/")])],
 	}), {
 		spaces: "    "
 	});

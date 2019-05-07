@@ -71,9 +71,9 @@ npm i -g wxapp-project
 	
 	- `less2wxss` 是否开启less转化成wxss的功能 默认为`true`
 	- `minifyImages` 是否开启压缩图片的功能 默认为`true`
-	- `px2rpx` 是否开启px转化成rpx 默认为`true`
+	- `px2rpx` 是否开启px转化成rpx 默认为`false`
 	- `rpxUnit` `px`转化成`rpx`的倍数 默认为`1`
-	- `inlineUrl` 是否将less中内联的文件转化成base64 默认为`true `
+	- `inlineUrl` 是否将less中内联的文件转化成base64 默认为`false `
 	- `minifyWxss` 是否开启转化打包后的wxss进行压缩 默认为`false`
 	- `ignore` 忽略监听文件
 	   - `type` 类型，如`folder` `file` `glob`等
